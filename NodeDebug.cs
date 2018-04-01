@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     public static class NodeDebug
     {

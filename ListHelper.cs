@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     public static class ListHelper
     {

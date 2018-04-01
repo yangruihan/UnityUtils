@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     /// <summary>
     /// 可入对象池接口

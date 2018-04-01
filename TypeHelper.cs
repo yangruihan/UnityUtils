@@ -2,11 +2,11 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     public class TypeHelper : Singleton<TypeHelper>
     {
-        private const string OutHandlerName = "NodeEditor.Core.OutHandle";
+        private const string OutHandlerName = "MyNamespace.Core.OutHandle";
 
         public static bool IsOutHandler(string fieldName)
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
 
     public static class StringHelper

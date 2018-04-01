@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     public static class FileHelper
     {

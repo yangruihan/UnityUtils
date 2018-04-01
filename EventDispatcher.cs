@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     public delegate void EventHandler(short type);
     public delegate void EventHandler<T>(short type,T msg);

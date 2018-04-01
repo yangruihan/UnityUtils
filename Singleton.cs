@@ -1,4 +1,4 @@
-﻿namespace NodeEditor.Utils
+﻿namespace MyNamespace.Utils
 {
     /// <summary>
     /// Singleton

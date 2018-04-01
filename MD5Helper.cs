@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     public static class MD5Helper
     {

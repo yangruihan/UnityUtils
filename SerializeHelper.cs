@@ -2,7 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-namespace NodeEditor.Utils
+namespace MyNamespace.Utils
 {
     public class SerializeHelper
     {
