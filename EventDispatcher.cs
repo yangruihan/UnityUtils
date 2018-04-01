@@ -127,7 +127,7 @@ namespace MyNamespace.Utils
             }
             catch
             {
-                NodeDebug.LogError("trying to add handler error,type:" + type + " handler:" + handler);
+                Debug.LogError("trying to add handler error,type:" + type + " handler:" + handler);
             }
         }
 
@@ -193,7 +193,7 @@ namespace MyNamespace.Utils
 #if DEBUG
             if (eventListeners.Contains(handler))
             {
-                NodeDebug.LogError("repeat to add " + handler);
+                Debug.LogError("repeat to add " + handler);
                 newEvent = false;
             }
 #endif

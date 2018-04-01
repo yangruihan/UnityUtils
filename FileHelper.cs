@@ -37,6 +37,9 @@ namespace MyNamespace.Utils
 
         public static string Read(string path)
         {
+            if (!File.Exists(path))
+                return "";
+
             string content = string.Empty;
             try
             {
@@ -44,7 +47,7 @@ namespace MyNamespace.Utils
             }
             catch (Exception e)
             {
-                NodeDebug.LogError("FileHelper Read file error: " + e);
+                Debug.LogError("FileHelper Read file error: " + e);
             }
 
             return content;
@@ -52,6 +55,9 @@ namespace MyNamespace.Utils
 
         public static string[] ReadLines(string path)
         {
+            if (!File.Exists(path))
+                return null;
+
             string[] contents = null;
             try
             {
@@ -59,7 +65,7 @@ namespace MyNamespace.Utils
             }
             catch (Exception e)
             {
-                NodeDebug.LogError("FileHelper Read file all lines error: " + e);
+                Debug.LogError("FileHelper Read file all lines error: " + e);
             }
             return contents;
         }
@@ -71,7 +77,7 @@ namespace MyNamespace.Utils
         /// <param name="path">目录</param>
         /// <param name="suffix">文件后缀</param>
         /// <param name="recursive">是否递归遍历</param>
-        public static List<FileInfo> GetFiles(string path, string suffix, bool recursive = false)
+        public static List<FileInfo> GetFiles(string path, string suffix = "", bool recursive = false)
         {
             var dir = new DirectoryInfo(path);
             if (dir == null)
@@ -100,10 +106,11 @@ namespace MyNamespace.Utils
         }
 
         /// <summary>
-        /// 删除目录下的所有文件
+        /// 删除目录下所有满足条件文件
         /// </summary>
         /// <returns>如果有删除的文件则返回真，否则返回假</returns>
         /// <param name="path">路径</param>
+        /// <param name="suffix">后缀</param>
         /// <param name="recursive">是否递归删除</param>
         public static bool DelFiles(string path, string suffix, bool recursive = false)
         {
@@ -121,6 +128,75 @@ namespace MyNamespace.Utils
 
                 return true;
             }
+        }
+
+        /// <summary>
+        /// 删除目录下所有满足条件的文件
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <param name="includeList">包含文件列表</param>
+        /// <param name="excludeList">排除文件列表</param>
+        /// <param name="recursive">是否递归删除</param>
+        /// <returns></returns>
+        public static bool DelFiles(string path, string suffix,
+                                    List<string> includeList,
+                                    List<string> excludeList = null,
+                                    bool recursive = false)
+        {
+            var files = GetFiles(path, suffix, recursive);
+            if (files == null || files.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                foreach (var file in files)
+                {
+                    if (includeList != null && includeList.Contains(file.Name))
+                    {
+                        File.Delete(file.FullName);
+                        continue;
+                    }
+
+                    if (excludeList != null && excludeList.Contains(file.Name))
+                        continue;
+
+                    File.Delete(file.FullName);
+                }
+
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 检查目录是否存在
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <param name="recursiveCreate">是否递归创建</param>
+        /// <returns></returns>
+        public static bool CheckDirExists(string path, bool recursiveCreate = false)
+        {
+            if (!recursiveCreate)
+                return Directory.Exists(path);
+
+            path = path.Replace("\\", "/");
+            if (!Directory.Exists(path))
+            {
+                string[] pathParts = path.Split('/');
+                string currentPath = pathParts[0];
+
+                if (!Directory.Exists(currentPath))
+                    Directory.CreateDirectory(currentPath);
+
+                for (int i = 1; i < pathParts.Length; i++)
+                {
+                    currentPath += "/" + pathParts[i];
+                    if (!Directory.Exists(currentPath))
+                        Directory.CreateDirectory(currentPath);
+                }
+            }
+
+            return true;
         }
     }
 }
