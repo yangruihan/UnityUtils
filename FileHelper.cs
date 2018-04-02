@@ -131,6 +131,20 @@ namespace MyNamespace.Utils
         }
 
         /// <summary>
+        /// 删除文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool DelFile(string path)
+        {
+            if (!File.Exists(path))
+                return false;
+            
+            File.Delete(path);
+            return true;
+        }
+
+        /// <summary>
         /// 删除目录下所有满足条件的文件
         /// </summary>
         /// <param name="path">路径</param>
@@ -197,6 +211,57 @@ namespace MyNamespace.Utils
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// 检查文件是否存在
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <param name="create">是否创建</param>
+        /// <returns></returns>
+        public static bool CheckFileExists(string path, bool create = false)
+        {
+            if (File.Exists(path))
+                return true;
+
+            var fileName = GetFileName(path);
+            var filePath = GetFilePath(path);
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                CheckDirExists(filePath, true);
+            }
+
+            Write(string.Empty, path);
+
+            return false;
+        }
+
+        /// <summary>
+        /// 从路径中分离出文件名
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <returns>文件名</returns>
+        public static string GetFileName(string path)
+        {
+            path = path.Replace("\\", "/");
+
+            return path.Substring(path.LastIndexOf("/") + 1);
+        }
+
+        /// <summary>
+        /// 从路径中分离文件名
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetFilePath(string path)
+        {
+            path = path.Replace("\\", "/");
+
+            if (path.Contains("/"))
+                return path.Substring(0, path.LastIndexOf("/"));
+            else
+                return string.Empty;
         }
     }
 }

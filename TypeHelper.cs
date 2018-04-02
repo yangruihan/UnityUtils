@@ -67,6 +67,36 @@ namespace MyNamespace.Utils
 
             return ret;
         }
+
+
+        public static string GetNodeValueFullName(NodeValueEnum enm)
+        {
+            switch(enm)
+            {
+                case NodeValueEnum.Object:
+                    return typeof(System.Object).FullName;
+                case NodeValueEnum.Byte:
+                    return typeof(Byte).FullName;
+                case NodeValueEnum.Short:
+                    return typeof(short).FullName;
+                case NodeValueEnum.Int:
+                    return typeof(int).FullName;
+                case NodeValueEnum.Float:
+                    return typeof(float).FullName;
+                case NodeValueEnum.String:
+                    return typeof(string).FullName;
+                //case NodeValueEnum.IntArray:
+                //    return typeof().FullName;
+                //case NodeValueEnum.FloatArray:
+                    //return typeof().FullName;
+                case NodeValueEnum.Blackboard:
+                    return typeof(short).FullName;
+                case NodeValueEnum.Event:
+                    return typeof(short).FullName;
+            }
+
+            return string.Empty;
+        }
     }
 }
 
