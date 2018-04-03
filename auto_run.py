@@ -18,7 +18,8 @@ def main():
                 f.write(content)
 
     for file in remove_list:
-        os.remove(file)
+        if os.path.exists(file):
+            os.remove(file)
 
     print("finish")
 
